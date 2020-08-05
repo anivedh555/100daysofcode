@@ -1,0 +1,45 @@
+1)void list_init(List *list, void (*destroy)(void *data));
+	Initializes the ll specified by list. Destroy arg provides a way to free dynamically allocated data when list_destroy fn is called.
+
+destroy should be set to free to free the data as linked list is destroyed. For structured data containing several dynamically allocated memebers, destory should be set to a user-defined fn that calls free for each dynamically allocated member as well for the struct itself.
+
+For a linked list containing data that is not to be freed, destroy should be set to NULL.
+
+
+
+2) void list_destroy(List *list)
+	Destroys ll specified by *list. No other operations are permitted after calling list_destroy unless list_init is called again.
+
+3)int list_ins_next(List *list, ListElmt *element, const void *data)
+	Inserts an element just after element in the linked list specified by list.
+	If element is NULL---> new element is inserted at HEAD.
+
+4) int list_rem_next(List *list, ListElmt *element, void **data)
+		Removes the element just after element from the ll specified by list. If element is NULL, element at the HEAD is removed. Upon return data points to the data stored in the element that was removed.
+
+
+5)int list_size(const List *list)
+	No of elements in the list
+
+6) ListElmt *list_head(const List *list)
+	returns element @ the head of the list 
+
+7) int list_is_head(const ListElmt *element)
+	1 if the element is at the head of the list or 0 otherwise
+
+8) int list_is_tail(const ListElmt *element)
+	1 if the element is at the tail of the list 0 otherwise.
+
+9) void *list_data(const ListElmt *element)
+	Data stored in the element of a linked list specified by element
+
+10) ListElmt *list_next(const LisElmt *element)
+	macro that evaluates to the element of a linked list following the element specified by element.
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+list_init: initializes a linked list. size is set to 0, destroy member to destroy, and the head and tail to NULL.
+list_destroy: destroys a linked list. Fn passed as destroy to list_init is called once for each element as it is removed provided Destroy was not set to NULL.
+	
